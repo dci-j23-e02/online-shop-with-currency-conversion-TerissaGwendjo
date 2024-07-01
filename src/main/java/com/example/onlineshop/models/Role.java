@@ -10,15 +10,17 @@ import java.util.Set;
 @Entity
 @Table(name = "entities")
 public class Role {
+    // Specifies that this field is the primary key in the database table.
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    // Generates a unique identifier using a database sequence.
     private Long id;
 
     @Column(unique = true, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    //User entities can have multiple Roles, and each Role can be associated with multiple Users
+    private Set<User> users = new HashSet<>(); // Represents a set of users associated with this role, initialized as a HashSet to prevent duplicates.
 
     //Constructors
     public Role() {

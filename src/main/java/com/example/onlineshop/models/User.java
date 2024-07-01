@@ -10,8 +10,9 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
+    // Specifies that this field is the primary key in the database table.
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    // Generates a unique identifier using a database sequence.
     private Long id;
 
     @Column(unique = true, nullable = false)
