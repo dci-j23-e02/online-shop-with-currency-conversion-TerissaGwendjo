@@ -23,12 +23,82 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false) // Indicates that this field is mapped to a column in the database table and cannot have null values
+    private boolean verified = false;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER) // Annotation indicating a many-to-many relationship between user and roles
     @JoinTable(
-            name = "user_roles",
+            name = "user_roles", // Specifies the name of the join table
+
+            // Specifies the join column for the user entity
+            // (the foreign key column that references the user entity).
             joinColumns = @JoinColumn(name = "user_id"),
+
+            // Specifies the inverse join column for the role entity
+            // (the foreign key column that references the role entity).
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+
+    // A set to hold the roles associated with the user,
+    // initialized as an empty HashSet
     private Set<Role> roles = new HashSet<>();
+
+    //Constructors
+
+    public User() {
+    }
+    public User(String username, String email, String password, boolean verified, Set<Role> roles) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.verified = verified;
+        this.roles = roles;
+    }
+    public User(Long id, String username, String email, String password, boolean verified, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.verified = verified;
+        this.roles = roles;
+    }
+
+    //Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public boolean isVerified() {
+        return verified;
+    }
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
