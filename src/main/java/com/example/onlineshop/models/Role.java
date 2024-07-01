@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "entities")
+@Table(name = "roles")
 public class Role {
     // Specifies that this field is the primary key in the database table.
     @Id
