@@ -32,6 +32,9 @@ public class Role {
         this.name = name;
         this.users = users;
     }
+    public Role(String name) {
+        this.name = name;
+    }
 
     //Getters and setters
 
