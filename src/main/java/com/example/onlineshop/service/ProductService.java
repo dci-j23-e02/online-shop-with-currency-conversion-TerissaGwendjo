@@ -1,19 +1,25 @@
 package com.example.onlineshop.service;
 
+import com.example.onlineshop.models.Cart;
 import com.example.onlineshop.models.Product;
 import com.example.onlineshop.models.User;
+import com.example.onlineshop.repositories.CartRepository;
 import com.example.onlineshop.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    CartRepository cartRepository;
 
     @Transactional
     public Product saveProduct(Product product) {
@@ -79,4 +85,23 @@ public class ProductService {
     }
 
 
+    public void addToCart(Long productId, User user) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        Cart cart = cartRepository.findByUser(user);
+        if (cart == null) {
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setProducts(new HashSet<>());
+        }
+        cart.getProducts().add(product);
+        cartRepository.save(cart);
+    }
+
+    public Set<Product> listAllProductsByUser(User user) {
+        Cart cart = cartRepository.findByUser(user);
+        if (cart != null) {
+            return cart.getProducts();
+        }
+        return Set.of(); // Return an empty set if the cart is null
+    }
 }

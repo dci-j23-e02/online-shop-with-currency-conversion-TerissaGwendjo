@@ -129,7 +129,7 @@ public class UserService implements UserDetailsService {
         String subject = "Email Verification";
 
         // Construct the verification URL using the generated token
-        String confirmationUrl = "http://localhost:8181/verify?token=" + token;
+        String confirmationUrl = "http://localhost:8989/verify?token=" + token;
 
         // Create the email message body with the verification URL
         String message = "Please click the link below to verify your email address:\n" + confirmationUrl;
@@ -219,6 +219,22 @@ public class UserService implements UserDetailsService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    //Assign role to users
+    public void assignRoleToUser(String username, String roleName) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            Role role = roleRepository.findByName(roleName);
+            if (role != null) {
+                user.getRoles().add(role);
+                userRepository.save(user);
+            } else {
+                throw new IllegalArgumentException("Role not found");
+            }
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
     }
 
 
