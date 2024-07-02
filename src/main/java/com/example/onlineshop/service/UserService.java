@@ -129,7 +129,7 @@ public class UserService implements UserDetailsService {
         String subject = "Email Verification";
 
         // Construct the verification URL using the generated token
-        String confirmationUrl = "http://localhost:8989/verify?token=" + token;
+        String confirmationUrl = "http://localhost:6969/verify?token=" + token;
 
         // Create the email message body with the verification URL
         String message = "Please click the link below to verify your email address:\n" + confirmationUrl;
