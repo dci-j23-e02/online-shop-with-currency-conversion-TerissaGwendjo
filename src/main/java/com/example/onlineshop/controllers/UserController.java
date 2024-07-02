@@ -90,7 +90,7 @@ public class UserController {
 
     @GetMapping("/admin-home")
     public String adminHome() {
-        return "admin-home.html";
+        return "admin-home";
     }
 
 
