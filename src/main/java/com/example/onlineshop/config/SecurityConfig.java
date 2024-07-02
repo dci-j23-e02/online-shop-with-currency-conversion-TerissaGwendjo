@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .logoutUrl("/logout") // Specifies the logout page URL
                         // Redirect to the login page with a logout parameter after a successful logout
                         .logoutSuccessUrl("/login?logout")
-                        .deleteCookies("JSESSIONNID") // Deletes the JSESSIONNID cookie upon logout
+                        .deleteCookies("JSESSIONID") // Deletes the JSESSIONNID cookie upon logout
                         .invalidateHttpSession(true) // Invalidates the HTTP session after logout to prevent session fixation attacks.
                         .permitAll()
                 );
