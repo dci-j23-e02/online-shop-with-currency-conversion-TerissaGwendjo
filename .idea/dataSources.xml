@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="onlineshopcurrencyconverter@localhost" uuid="4f1fad98-e6eb-4555-a4f6-eaa11da5b34a">
+    <data-source source="LOCAL" name="onlineshopcurrencyconverter1@localhost" uuid="e4953f95-6f46-4989-8415-4d1100a34c0e">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/onlineshopcurrencyconverter</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/onlineshopcurrencyconverter1</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

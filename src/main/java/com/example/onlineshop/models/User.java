@@ -13,6 +13,7 @@ public class User {
     // Specifies that this field is the primary key in the database table.
     @Id
     // Generates a unique identifier using a database sequence.
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(unique = true, nullable = false)
