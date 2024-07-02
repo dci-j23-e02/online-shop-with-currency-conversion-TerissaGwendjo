@@ -29,7 +29,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         // Permit all requests to the home page and static resources
-                        .requestMatchers("/signup", "/login", "/verify", "/currency-converter").permitAll()
+                        .requestMatchers("/signup", "/verify", "/currency-converter").permitAll()
                         .requestMatchers( "/assign-admin","/admin-home", "/products/add", "/products/update*", "/products/delete*").hasRole("ADMIN")
                         // Require authentication for any other request
                         .anyRequest().authenticated()
