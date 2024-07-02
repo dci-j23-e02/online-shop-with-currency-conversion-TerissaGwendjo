@@ -21,6 +21,7 @@ public class SecurityConfig {
         // Return the UserService (which implements UserDetailService) as the UserDetailsService
     }
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //allows us to define the chain of security filters
         // This method configures the HttpSecurity object, which allows customization of security settings for HTTP requests.
