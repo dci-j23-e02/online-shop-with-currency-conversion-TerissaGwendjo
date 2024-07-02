@@ -13,50 +13,50 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Modifying
     // Modifies the amount of an Expense entity using a custom JPQL query.
     @Query("UPDATE Product  p SET p.amount=?1 WHERE p.id=?2")
-    void updateExpenseAmount(Double amount, Long id);
+    void updateProductAmount(Double amount, Long id);
 
     @Modifying
     @Query("DELETE FROM Product p WHERE p.category=?1")
-    void deleteExpenseByCategory(String category);
+    void deleteProductByCategory(String category);
 
     @Modifying
     @Query("UPDATE Product p SET p.description=?1 WHERE p.id=?2")
-    void updateExpenseDescription(String description, Long id);
+    void updateProductDescription(String description, Long id);
 
     @Modifying
     @Query("UPDATE Product p SET p.category=?1  WHERE p.id=?2")
-    void updateExpenseCategory(String category, Long id);
+    void updateProductCategory(String category, Long id);
 
 
     @Modifying
     @Query("DELETE FROM Product p WHERE p.date BETWEEN ?1 AND ?2")
-    void deleteExpensesByDateRange(LocalDate startDate, LocalDate endDate);
+    void deleteProductsByDateRange(LocalDate startDate, LocalDate endDate);
 
     @Modifying
     @Query("UPDATE Product p SET p.date=?1 WHERE p.id=?2")
-    void updateExpenseDate(LocalDate date, Long id);
+    void updateProductDate(LocalDate date, Long id);
 
     @Modifying
     @Query("UPDATE Product p SET p.user =?1 WHERE p.id=?2")
-    void updateExpenseUser(User user, Long id);
+    void updateProductUser(User user, Long id);
 
     @Modifying
     @Query("DELETE FROM Product e WHERE e.user.id=?1")
-    void deleteExpensesByUser(Long userId);
+    void deleteProductByUser(Long userId);
 
     @Modifying
     @Query("UPDATE Product p SET p.amount = ?1 WHERE p.id IN ?2")
-    void updateMultipleExpenses(Double amount, List<Long> ids);
+    void updateMultipleProducts(Double amount, List<Long> ids);
 
     @Modifying
     @Query("DELETE FROM Product e WHERE e.id = ?1")
-    void deleteExpenseById(Long id);
+    void deleteProductById(Long id);
 
     @Query("SELECT p FROM  Product p WHERE p.user.id=?1")
-    List<Product> findAllExpensesByUser(Long userId);
+    List<Product> findAllProductsByUser(Long userId);
 
 
     @Modifying
     @Query("DELETE FROM Product p WHERE p.date BETWEEN ?1 AND ?2 AND p.user.id=?3")
-    void deleteExpensesByDateRangeAndUser(LocalDate startDate, LocalDate endDate, Long userId);
+    void deleteProductsByDateRangeAndUser(LocalDate startDate, LocalDate endDate, Long userId);
 }
