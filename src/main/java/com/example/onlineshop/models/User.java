@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,31 +41,38 @@ public class User {
             // (the foreign key column that references the role entity).
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-
     // A set to hold the roles associated with the user,
     // initialized as an empty HashSet
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY) // Lazy fetch strategy: Products in the cart are loaded only when accessed, optimizing performance
+    @JoinTable(
+            name = "user_cart",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> cart; // Represents the user's shopping cart, lazily loaded
 
     //Constructors
 
     public User() {
     }
-    public User(String username, String email, String password, boolean verified, Set<Role> roles) {
+    public User(String username, String email, String password, boolean verified, Set<Role> roles, List<Product> cart) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.verified = verified;
         this.roles = roles;
+        this.cart = cart;
     }
-    public User(Long id, String username, String email, String password, boolean verified, Set<Role> roles) {
+    public User(Long id, String username, String email, String password, boolean verified, Set<Role> roles, List<Product> cart) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.verified = verified;
         this.roles = roles;
+        this.cart = cart;
     }
-
     //Getters and setters
 
     public Long getId() {
@@ -102,6 +110,12 @@ public class User {
     }
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+    public List<Product> getCart() {
+        return cart;
+    }
+    public void setCart(List<Product> cart) {
+        this.cart = cart;
     }
 
     public void addRole(Role role) {

@@ -34,22 +34,6 @@ public class ProductController {
         model.addAttribute("products", products);
         return "products";
     }
-    // Method to add product to user's cart, accessible by all users
-    @PostMapping("/add-to-cart")
-    public String addToCart(@RequestParam Long productId, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        productService.addToCart(productId, user);
-        return "redirect:/products/cart";
-    }
-    // Method to list all products in the user's cart
-    @GetMapping("/cart")
-    public String listAllProductsByUser(Model model, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        Set<Product> products = productService.listAllProductsByUser(user);
-        model.addAttribute("products", products);
-        return "cart-products";
-    }
-
 
     //Methods accessible only by admins
     @GetMapping("/add")
