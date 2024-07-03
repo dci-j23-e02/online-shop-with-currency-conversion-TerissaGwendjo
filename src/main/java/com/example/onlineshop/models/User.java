@@ -46,18 +46,15 @@ public class User {
     // initialized as an empty HashSet
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY) // Lazy fetch strategy: Products in the cart are loaded only when accessed, optimizing performance
-    @JoinTable(
-            name = "user_cart",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> cart = new ArrayList<>(); // Represents the user's shopping cart, lazily loaded
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Cart cart;
 
     //Constructors
 
     public User() {
     }
-    public User(String username, String email, String password, boolean verified, Set<Role> roles, List<Product> cart) {
+
+    public User(String username, String email, String password, boolean verified, Set<Role> roles, Cart cart) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -65,7 +62,8 @@ public class User {
         this.roles = roles;
         this.cart = cart;
     }
-    public User(Long id, String username, String email, String password, boolean verified, Set<Role> roles, List<Product> cart) {
+
+    public User(Long id, String username, String email, String password, boolean verified, Set<Role> roles, Cart cart) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -74,6 +72,7 @@ public class User {
         this.roles = roles;
         this.cart = cart;
     }
+
     //Getters and setters
 
     public Long getId() {
@@ -112,10 +111,10 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    public List<Product> getCart() {
+    public Cart getCart() {
         return cart;
     }
-    public void setCart(List<Product> cart) {
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
 

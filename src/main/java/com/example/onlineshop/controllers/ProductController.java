@@ -145,7 +145,7 @@ public class ProductController {
         productService.updateMultipleProducts(amount, ids);
         return "redirect:/products";
     }
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProductById(
             @PathVariable Long id
