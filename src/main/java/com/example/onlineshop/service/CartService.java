@@ -1,7 +1,9 @@
 package com.example.onlineshop.service;
 
+import com.example.onlineshop.models.Cart;
 import com.example.onlineshop.models.Product;
 import com.example.onlineshop.models.User;
+import com.example.onlineshop.repositories.CartRepository;
 import com.example.onlineshop.repositories.ProductRepository;
 import com.example.onlineshop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +21,38 @@ public class CartService {
     private ProductRepository productRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CartRepository cartRepository;
 
     // Method to add a product to the user's cart
     public void addToCart(Long productId, User user) {
-        User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + user.getId()));
+        // Fetch the product by ID
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + productId));
 
-        Product product = productService.findProductById(productId);
+        // Fetch or create user's cart
+        Cart cart = user.getCart();
+        if (cart == null) {
+            cart = new Cart();
+            cart.setUser(user);
+        }
 
-        managedUser.getCart().add(product); // Add product to the user's cart
-        userRepository.save(managedUser); // Save the updated user entity
+        // Add the product to the cart
+        cart.getProducts().add(product);
+
+        // Save the cart to persist changes
+        cartRepository.save(cart);
     }
 
     public List<Product> getProductsInCart(User user) {
-        return user.getCart();
+        // Retrieve the user entity from the database with its associated cart
+        User userWithCart = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Retrieve the products from the cart
+        List<Product> productsInCart = userWithCart.getCart().getProducts();
+
+        return productsInCart;
     }
 
 }
