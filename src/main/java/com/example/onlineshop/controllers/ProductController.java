@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -54,6 +55,23 @@ public class ProductController {
 
         return "redirect:/products";
     }
+
+    @GetMapping("/edit/{id}") // Maps GET requests for /expenses/edit/{id} to this method
+    @PreAuthorize("hasRole('ADMIN')")
+    public String showEditProductForm(@PathVariable Long id, Model model) {
+        Product product = productService.findProductById(id); // Finds the product by ID
+        model.addAttribute("product", product); // Adds the product to the model
+        model.addAttribute("users", userService.findAllUsers()); // Adds a list of all users to the model
+        return "edit-product"; // Returns the view name "edit-expense"
+    }
+    @PostMapping("/update/{id}") // Maps POST requests for /expenses/update/{id} to this method
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updateProduct(@PathVariable Long id, @ModelAttribute Product product) {
+        productService.updateProduct(id, product); // Updates the expense
+        return "redirect:/products"; // Redirects to the list of expenses
+    }
+
+
     @PostMapping("/updateAmount")
     @PreAuthorize("hasRole('ADMIN')")
     public String updateProductAmount(
@@ -127,10 +145,10 @@ public class ProductController {
         productService.updateMultipleProducts(amount, ids);
         return "redirect:/products";
     }
-    @PostMapping("/deleteById")
+    @PostMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProductById(
-            @RequestParam Long id
+            @PathVariable Long id
     ){
         productService.deleteProductById(id);
         return "redirect:/products";

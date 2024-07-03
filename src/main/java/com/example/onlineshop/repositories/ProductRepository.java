@@ -49,7 +49,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     void updateMultipleProducts(Double amount, List<Long> ids);
 
     @Modifying
-    @Query("DELETE FROM Product e WHERE e.id = ?1")
+    @Query("DELETE FROM Product p WHERE p.id = ?1")
     void deleteProductById(Long id);
 
     @Query("SELECT p FROM  Product p WHERE p.user.id=?1")

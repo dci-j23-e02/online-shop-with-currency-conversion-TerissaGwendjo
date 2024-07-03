@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProductService {
@@ -80,7 +78,27 @@ public class ProductService {
     public  void deleteProductsByDateRangeAndUser(LocalDate startDate, LocalDate endDate, Long userId){
         productRepository.deleteProductsByDateRangeAndUser(startDate, endDate, userId);
     }
-   public Optional <Product> findById (Long productId) {
+  /* public Optional <Product> findProductById(Long productId) {
         return productRepository.findById(productId);
-   }
+   }*/
+  public Product findProductById(Long id) {
+      return productRepository.findById(id).orElse(null);
+  }
+
+    @Transactional
+    public void updateProduct(Long id, Product product) {
+        Product existingProduct = productRepository.findById(id).orElse(null);
+        if (existingProduct != null) {
+            existingProduct.setName(product.getName());
+            existingProduct.setAmount(product.getAmount());
+            existingProduct.setDescription(product.getDescription());
+            existingProduct.setCategory(product.getCategory());
+            existingProduct.setDate(product.getDate());
+
+            productRepository.save(existingProduct);
+        } else {
+            System.err.println("Product not found with ID: " + id);
+        }
+    }
+
 }

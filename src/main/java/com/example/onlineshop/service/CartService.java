@@ -17,20 +17,18 @@ public class CartService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private ProductService productService;
 
     // Method to add a product to the user's cart
-    public void addToCart(String name, String description, Double amount,
-                          String category, LocalDate date, User user) {
-        // Create a new Product entity
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setAmount(amount);
-        product.setCategory(category);
-        product.setDate(date);
+    public void addToCart(Long productId, User user) {
+        User managedUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + user.getId()));
 
-        // Add the product to the user's cart
-        user.getCart().add(product);
+        Product product = productService.findProductById(productId);
+
+        managedUser.getCart().add(product); // Add product to the user's cart
+        userRepository.save(managedUser); // Save the updated user entity
     }
 
     public List<Product> getProductsInCart(User user) {

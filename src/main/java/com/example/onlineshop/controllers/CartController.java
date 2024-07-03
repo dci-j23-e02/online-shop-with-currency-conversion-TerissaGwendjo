@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,18 +40,11 @@ public class CartController {
     }
 
     // Endpoint to add a product to the cart
-    @PostMapping("/add-to-cart/{productId}")
-    public String addToCart(@PathVariable Long productId, Authentication authentication) {
-        User user = userService.findByUsername(authentication.getName());
-
-        // Find the product by productId
-        Product product = productService.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + productId));
-
-        // Add the product to the user's cart (implementation depends on your design, e.g., using CartService)
-        // cartService.addToCart(productId, user);
-
-        return "redirect:/cart/products"; // Redirect to the products page after adding to cart
+    @PostMapping("/add")
+    public String addToCart(@RequestParam("productId") Long productId, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        cartService.addToCart(productId, user);
+        return "redirect:/cart"; // Redirect to the cart view page
     }
 
 }

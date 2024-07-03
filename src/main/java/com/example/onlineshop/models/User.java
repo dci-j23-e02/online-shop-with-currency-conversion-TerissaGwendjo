@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class User {
             name = "user_cart",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> cart; // Represents the user's shopping cart, lazily loaded
+    private List<Product> cart = new ArrayList<>(); // Represents the user's shopping cart, lazily loaded
 
     //Constructors
 

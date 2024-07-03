@@ -30,7 +30,7 @@
             <td th:text="${product.category}">Product Category</td>
             <td th:text="${product.date}">Date Added</td>
             <td>
-                <form action="/cart/add-to-cart/{productId}" method="post">
+                <form action="/cart/add" method="post">
                     <input type="hidden" name="productId" th:value="${product.id}" />
                     <button type="submit" class="btn btn-primary">Add to Cart</button>
                 </form>
