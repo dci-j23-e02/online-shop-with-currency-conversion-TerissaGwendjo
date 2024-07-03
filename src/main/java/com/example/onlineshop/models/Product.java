@@ -21,13 +21,16 @@ public class Product {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Represents the amount of the transaction.
+    // Represents the amount of the product
     private Double amount;
+
+    // Represents the name of the product.
+    private String name;
 
     // Represents a description or note associated with the transaction.
     private String description;
 
-    // Represents the category or type of the transaction.
+    // Represents the category or type of product
     private String category;
 
     // Represents the date of the transaction.
@@ -38,18 +41,20 @@ public class Product {
     public Product() {
     }
 
-    public Product(User user, Double amount, String description, String category, LocalDate date) {
+    public Product(User user, Double amount, String name, String description, String category, LocalDate date) {
         this.user = user;
         this.amount = amount;
+        this.name = name;
         this.description = description;
         this.category = category;
         this.date = date;
     }
 
-    public Product(Long id, User user, Double amount, String description, String category, LocalDate date) {
+    public Product(Long id, User user, Double amount, String name, String description, String category, LocalDate date) {
         this.id = id;
         this.user = user;
         this.amount = amount;
+        this.name = name;
         this.description = description;
         this.category = category;
         this.date = date;
@@ -103,5 +108,12 @@ public class Product {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }

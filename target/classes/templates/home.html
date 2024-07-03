@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/products}">Products</a>
+                    <a class="nav-link" th:href="@{/cart/products}">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/currency-converter}">Currency Converter</a>
@@ -37,8 +37,8 @@
             <h1 class="mt-5">Welcome to the online shop with currency converter</h1>
             <p class="lead">Convert efficiently from one currency to another.</p>
             <div class="mt-4">
-                <a th:href="@{/products}" class="btn btn-primary btn-lg">View Products</a>
-                <a th:href="@{/products/cart}" class="btn btn-success btn-lg">Add Products to Cart</a>
+                <a th:href="@{/cart/products}" class="btn btn-primary btn-lg">View Products</a>
+                <a th:href="@{/cart/add-to-cart/{productId}}" class="btn btn-success btn-lg">Add Products to Cart</a>
             </div>
         </div>
     </div>

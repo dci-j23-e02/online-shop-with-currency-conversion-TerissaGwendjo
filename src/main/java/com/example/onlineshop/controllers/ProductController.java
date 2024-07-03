@@ -6,12 +6,10 @@ import com.example.onlineshop.service.ProductService;
 import com.example.onlineshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -42,12 +40,18 @@ public class ProductController {
         model.addAttribute("product", new Product());
         return "add-product";
     }
+    // Endpoint to add a new product (restricted to admins)
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public String addProduct(Product product,  Principal principal){
-        User user  = userService.findByUsername(principal.getName());
-        product.setUser(user);
+    public String addProduct(@ModelAttribute("product") Product product, Authentication authentication) {
+        User adminUser = userService.findByUsername(authentication.getName());
+
+        // Associate the product with the admin user
+        product.setUser(adminUser);
+
+        // Save the product
         productService.saveProduct(product);
+
         return "redirect:/products";
     }
     @PostMapping("/updateAmount")
