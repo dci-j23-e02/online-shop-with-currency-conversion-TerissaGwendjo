@@ -1,5 +1,6 @@
 package com.example.onlineshop.service;
 
+import com.example.onlineshop.models.Cart;
 import com.example.onlineshop.models.Role;
 import com.example.onlineshop.models.User;
 import com.example.onlineshop.models.VerificationToken;
@@ -217,7 +218,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+
+        return user;
     }
 
     public User findByEmail(String email) {

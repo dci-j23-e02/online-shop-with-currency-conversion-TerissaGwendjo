@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Available Products</title>
+    <title>Error</title>
     <!-- Bootstrap CSS link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
@@ -10,33 +10,9 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5 mb-4">Available Products</h1>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Date Added</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.name}">Product Name</td>
-            <td th:text="${product.description}">Product Description</td>
-            <td th:text="${product.amount}">Product Amount</td>
-            <td th:text="${product.category}">Product Category</td>
-            <td th:text="${product.date}">Date Added</td>
-            <td>
-                <a th:href="@{/cart/add/{id}(id=${product.id})}" class="btn btn-primary btn-sm">Add to Cart</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a href="/cart">View Cart</a>
+    <h1 class="mt-5 mb-4">An error occurred</h1>
+    <p th:text="${error}">Sorry, something went wrong. Please try again later.</p>
+    <a href="/" class="btn btn-primary">Go to Home</a>
 </div>
 
 <!-- Bootstrap JS for components like modals or dropdowns) -->
