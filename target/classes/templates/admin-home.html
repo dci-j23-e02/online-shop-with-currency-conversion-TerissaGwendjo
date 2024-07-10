@@ -4,9 +4,72 @@
   <meta charset="UTF-8">
   <title>Admin Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    body {
+      background-color: #f8f9fa; /* Light gray background */
+      color: #343a40; /* Dark text color */
+    }
+    .navbar {
+      background-color: #343a40; /* Black navbar background */
+      color: #ffffff; /* White text color */
+      border-bottom: 1px solid #292b2c; /* Dark gray border bottom */
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #ffffff; /* White color for brand */
+    }
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1); /* Transparent border color for toggler */
+    }
+    .navbar-nav .nav-link {
+      color: #ffffff; /* White text color for nav links */
+    }
+    .navbar-nav .nav-link:hover {
+      color: #cccccc; /* Light gray text color on hover */
+    }
+    .container {
+      margin-top: 50px;
+    }
+    h1 {
+      color: #343a40; /* Dark heading color */
+    }
+    p.lead {
+      font-size: 1.2rem;
+    }
+    .btn-lg {
+      padding: 1rem 2rem; /* Larger button padding */
+      margin-top: 20px;
+    }
+    .btn-primary {
+      background-color: #007bff; /* Primary button color */
+      border-color: #007bff; /* Primary button border color */
+    }
+    .btn-primary:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+      border-color: #0056b3; /* Darker shade border on hover */
+    }
+    .btn-success {
+      background-color: #28a745; /* Success button color */
+      border-color: #28a745; /* Success button border color */
+    }
+    .btn-success:hover {
+      background-color: #218838; /* Darker shade on hover */
+      border-color: #1e7e34; /* Darker shade border on hover */
+    }
+    .btn-info {
+      background-color: #17a2b8; /* Info button color */
+      border-color: #17a2b8; /* Info button border color */
+    }
+    .btn-info:hover {
+      background-color: #138496; /* Darker shade on hover */
+      border-color: #117a8b; /* Darker shade border on hover */
+    }
+  </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Online Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +97,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       <h1 class="mt-5">Welcome Admin</h1>
-      <p class="lead">Manage your expenses efficiently and effectively.</p>
+      <p class="lead">Manage your products efficiently and effectively.</p>
       <div class="mt-4">
         <a th:href="@{/products}" class="btn btn-primary btn-lg">View Products</a>
         <a th:href="@{/products/add}" class="btn btn-success btn-lg">Add Products</a>

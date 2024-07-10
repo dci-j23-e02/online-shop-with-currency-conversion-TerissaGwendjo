@@ -4,38 +4,81 @@
     <meta charset="UTF-8">
     <title>Currency Converter</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .currency-form {
+            background-color: rgba(255, 255, 255, 0.8); /* White background with transparency */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        }
+        .form-control {
+            height: calc(2.5rem + 2px); /* Match Bootstrap default input height */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Primary button border color */
+        }
+        .btn-primary:hover {
+            background-color: #0069d9; /* Darker shade on hover */
+            border-color: #0062cc; /* Darker shade border on hover */
+        }
+        h2 {
+            color: #007bff; /* Heading color */
+        }
+        h3 {
+            color: #28a745; /* Converted amount heading color */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Secondary button color */
+            border-color: #6c757d; /* Secondary button border color */
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker shade on hover */
+            border-color: #545b62; /* Darker shade border on hover */
+        }
+    </style>
 </head>
-<body>
+<body style="background-image: url('/pictures/pic3.jpg')">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="text-center mt-5">Currency Converter</h2>
-            <form th:action="@{/currency-converter}" method="post">
-                <div class="mb-3">
-                    <label for="fromCurrency" class="form-label">From Currency</label>
-                    <select class="form-control" id="fromCurrency" name="fromCurrency" required>
-                        <option th:each="currency : ${supportedCurrencies}" th:value="${currency}" th:text="${currency}"
-                                th:selected="${currency} == 'USD'"></option>
-                    </select>
+            <div class="currency-form">
+                <h2 class="text-center mt-5">Currency Converter</h2>
+                <form th:action="@{/currency-converter}" method="post">
+                    <div class="mb-3">
+                        <label for="fromCurrency" class="form-label">From Currency</label>
+                        <select class="form-control" id="fromCurrency" name="fromCurrency" required>
+                            <option th:each="currency : ${supportedCurrencies}" th:value="${currency}" th:text="${currency}"
+                                    th:selected="${currency} == 'USD'"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="toCurrency" class="form-label">To Currency</label>
+                        <select class="form-control" id="toCurrency" name="toCurrency" required>
+                            <option th:each="currency : ${supportedCurrencies}" th:value="${currency}" th:text="${currency}"
+                                    th:selected="${currency} == 'EUR'"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Convert</button>
+                </form>
+                <div th:if="${convertedAmount}">
+                    <h3 class="text-center mt-3">Converted Amount: <span th:text="${convertedAmount}"></span></h3>
                 </div>
-                <div class="mb-3">
-                    <label for="toCurrency" class="form-label">To Currency</label>
-                    <select class="form-control" id="toCurrency" name="toCurrency" required>
-                        <option th:each="currency : ${supportedCurrencies}" th:value="${currency}" th:text="${currency}"
-                                th:selected="${currency} == 'EUR'"></option>
-                    </select>
+                <div class="text-center mt-3">
+                    <a th:href="@{/}" class="btn btn-secondary">Back Home</a>
                 </div>
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Amount</label>
-                    <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Convert</button>
-            </form>
-            <div th:if="${convertedAmount}">
-                <h3 class="text-center mt-3">Converted Amount: <span th:text="${convertedAmount}"></span></h3>
-            </div>
-            <div class="text-center mt-3">
-                <a th:href="@{/}" class="btn btn-secondary">Back Home</a>
             </div>
         </div>
     </div>

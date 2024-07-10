@@ -7,37 +7,69 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossorigin="anonymous">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #CC5500; /* Burnt orange background */
+            color: #ffffff; /* White text color */
+        }
+        .table-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .table-header {
+            background-color: #CC5500;
+            color: white;
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+        a {
+            color: #ffffff;
+        }
+        a:hover {
+            color: #dddddd;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5 mb-4">Available Products</h1>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Date Added</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.name}">Product Name</td>
-            <td th:text="${product.description}">Product Description</td>
-            <td th:text="${product.amount}">Product Amount</td>
-            <td th:text="${product.category}">Product Category</td>
-            <td th:text="${product.date}">Date Added</td>
-            <td>
-                <a th:href="@{/cart/add/{id}(id=${product.id})}" class="btn btn-primary btn-sm">Add to Cart</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a href="/cart">View Cart</a>
-    <a href="/" class="btn btn-primary">Go to Home</a>
+    <div class="row justify-content-center">
+        <div class="col-md-12 table-container">
+            <h1 class="text-center mt-5 mb-4">Available Products</h1>
+            <table class="table table-striped">
+                <thead class="table-header">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}">Product Name</td>
+                    <td th:text="${product.description}">Product Description</td>
+                    <td th:text="${product.amount}">Product Amount</td>
+                    <td th:text="${product.category}">Product Category</td>
+                    <td th:text="${product.date}">Date Added</td>
+                    <td>
+                        <a th:href="@{/cart/add/{id}(id=${product.id})}" class="btn btn-primary btn-sm">Add to Cart</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="text-center btn-container">
+                <a href="/cart" class="btn btn-secondary me-2">View Cart</a>
+                <a href="/" class="btn btn-primary">Go to Home</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap JS for components like modals or dropdowns) -->
